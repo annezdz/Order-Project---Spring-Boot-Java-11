@@ -14,6 +14,10 @@ public class UserResource {
      * Camada de Recursos (rest controllers)
      * Dependem da camada de serviço que por sua vez depende dos repositories
      * ResponseEntity = retorna um tipo específico para respostas de requisições web
+     * Maven - ferramenta de gerenciamento de dependências e build do Java.
+     * JPA - ferramenta de mapeamento objeto relacional padrão do Java que faz a conversão entre o modelo
+     * orientado a objetos e o paradigma relacional.
+     *
      * */
 
     @GetMapping
