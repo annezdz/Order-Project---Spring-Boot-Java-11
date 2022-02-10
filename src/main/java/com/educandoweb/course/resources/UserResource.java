@@ -48,4 +48,18 @@ public class UserResource {
         return ResponseEntity.created(uri).body(obj);
     }
 
+    //Para o id ser reconhecido como uma variável da url vamos colocar o PathVariable
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        //noContect() retorna uma resposta vazia
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+        obj = userService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
 }

@@ -28,5 +28,25 @@ public class UserService {
         return userRepository.save(obj);
     }
 
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+    public User update(Long id, User obj) {
+        //Com o getOne ele instancia o usuário mas não vai para o DB,
+        // ele apenas passa a ser monitorado com o JPA. É melhor usar o getOne do que o findById, que
+        //vai no banco de dados e tras o objeto para a gente. O getOne apenas prepara o objeto monitorado
+        //para efetuarmos operações com o DB, é mais eficiente
+
+        User entity = userRepository.getOne(id);
+        updateData(entity, obj);
+        return userRepository.save(entity);
+    }
+
+    private void updateData(User entity, User obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+    }
+
 
 }
