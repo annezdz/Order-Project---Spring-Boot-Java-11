@@ -28,6 +28,10 @@ public class Product implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>(); //instanciar garante que a lista não será nula, porém vazia;
 
+    //Coleção de itens na classe Product
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> itens = new HashSet<>();
+
     public Product() {}
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
@@ -80,6 +84,17 @@ public class Product implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    //Aqui nós vamos percorrer a coleção de Itens (que é uma coleção do tipo OrderItem associada ao produto)
+    //Para cada elemento x dessa coleção vamos adicionar ao set o getOrder associado ao OrderItem
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for(OrderItem x : itens) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override

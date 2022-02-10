@@ -31,8 +31,9 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    //Coleção de itens na classe Order
     @OneToMany(mappedBy = "id.order")
-    private Set<OrderItem> items = new HashSet<>();
+    private Set<OrderItem> itens = new HashSet<>();
 
 
     public Order() {}
@@ -79,7 +80,7 @@ public class Order implements Serializable {
     }
 
     public Set<OrderItem> getItems() {
-        return items;
+        return itens;
     }
 
     @Override
